@@ -1,4 +1,9 @@
-<mat-form-field>
-    <textarea name="" id="" rows="6" matInput></textarea>
-    <button mat-raised-button (click)="onAddPost()">Save Post</button>
-</mat-form-field>
+<form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    <mat-form-field>
+        <input name="title" type="text" matInput placeholder="Title" ngModel required>
+    </mat-form-field>
+    <mat-form-field>
+        <textarea name="content" id="" rows="6" matInput ngModel required></textarea>
+        <button mat-raised-button type="submit">Save Post</button>
+    </mat-form-field>
+</form>

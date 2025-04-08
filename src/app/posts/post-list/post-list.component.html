@@ -7,9 +7,13 @@
                         {{ post.title }}
                     </mat-expansion-panel-header>
                     <p>{{ post.content }}</p>
+                    <mat-action-row>
+                        <button mat-raised-button>Edit</button>
+                        <button mat-flat-button (click)="onDeletePost(post.id)">Delete</button>
+                    </mat-action-row>
                 </mat-expansion-panel>
             }
-        </mat-accordion>
+        </mat-accordion>  
     } @else {
         <p class="mat-body-1">No posts added yet!</p>
     }   

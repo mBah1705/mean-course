@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import path from 'path';
 
 import postsRoutes from './routes/posts.js';
+import userRoutes from './routes/user.js';
 
 const app = express();
 const mongoDB = 'mongodb+srv://moon:DJ4dsBfs6kyThxL@cluster0.2ccb2lc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
@@ -35,5 +36,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/posts', postsRoutes);
+app.use('/api/user', userRoutes);
 
 export default app;

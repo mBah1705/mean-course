@@ -12,5 +12,13 @@ export const routes: Routes = [
     {
         path: 'edit/:id',
         loadComponent: () => import('./posts/post-create/post-create.component').then(m => m.PostCreateComponent),
-    }
+    },
+    {
+        path: 'login',
+        loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent),
+    },
+    {
+        path: 'signup',
+        loadComponent: () => import('./auth/signup/signup.component').then(m => m.SignupComponent),
+    },
 ];

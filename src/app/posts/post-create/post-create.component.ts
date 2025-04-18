@@ -91,7 +91,6 @@ export class PostCreateComponent implements OnInit {
       this.postsService.addPost(this.form.value.title, this.form.value.content, this.imageBlob)
     }
     
-    // this.form.reset()
-    // this.router.navigate(['/'])
+    this.form.reset()
   }
 }

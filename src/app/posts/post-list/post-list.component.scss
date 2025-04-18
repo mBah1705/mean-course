@@ -1,3 +1,19 @@
 .extra-width {
   width: 500px;
 }
+
+.image-preview {
+  height: 10rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+
+  img {
+    height: 100%;
+  }
+}
+
+mat-paginator {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}

@@ -1,9 +1,26 @@
-<form (submit)="onAddPost(postForm)" #postForm="ngForm">
+<form [formGroup]="form" (submit)="onSavePost()" >
     <mat-form-field>
-        <input name="title" type="text" matInput placeholder="Title" ngModel required>
+        <input formControlName="title" type="text" matInput placeholder="Title">
+        @if (form.get('title')?.invalid) {
+            <mat-error>Please enter a post title</mat-error>
+        }
     </mat-form-field>
+    <div class="pick-image-container">
+        <button mat-flat-button (click)="filePicker.click()" type="button">Pick Image</button>
+        <input type="file" #filePicker hidden (change)="onImagePicked($event)">
+    </div>
+    @if (imagePreview && imageFormControlIsValid) {
+        <div class="image-preview">
+            <img [src]="imagePreview" [alt]="form.value.title">
+        </div>
+    } @else if (!imageFormControlIsValid) {
+        <mat-error>Please pick an image</mat-error>
+    }
     <mat-form-field>
-        <textarea name="content" rows="6" matInput ngModel required placeholder="Content"></textarea>
-        <button mat-raised-button type="submit">Save Post</button>
+        <textarea formControlName="content" rows="6" matInput placeholder="Content"></textarea>
+        @if (form.get('content')?.invalid) {
+            <mat-error>Please enter a post content</mat-error>
+        }
     </mat-form-field>
+    <button mat-raised-button type="submit">Save Post</button>
 </form>

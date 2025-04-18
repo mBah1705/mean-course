@@ -6,14 +6,23 @@
                     <mat-expansion-panel-header>
                         {{ post.title }}
                     </mat-expansion-panel-header>
+                    <div class="image-preview">
+                        <img [src]="post.imagePath" [alt]="post.title">
+                    </div>
                     <p>{{ post.content }}</p>
                     <mat-action-row>
-                        <button mat-raised-button>Edit</button>
+                        <a mat-raised-button [routerLink]="['/edit', post.id]" routerLinkActive="router-link-active" >Edit</a>
                         <button mat-flat-button (click)="onDeletePost(post.id)">Delete</button>
                     </mat-action-row>
-                </mat-expansion-panel>
+                </mat-expansion-panel> 
             }
         </mat-accordion>  
+        <mat-paginator 
+            [length]="length()"
+            [pageSizeOptions]="pageSizeOptions"
+            [pageIndex]="pageIndex"
+            [pageSize]="pageSize"
+            (page)="onChangedPage($event)"></mat-paginator>
     } @else {
         <p class="mat-body-1">No posts added yet!</p>
     }   

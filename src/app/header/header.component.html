@@ -1,1 +1,7 @@
-<mat-toolbar color="primary"> Toolbar </mat-toolbar>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <span><a mat-stroked-button routerLink="/">My Toolbar</a></span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/create" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">New Post</a>
+  </mat-toolbar-row>
+</mat-toolbar>

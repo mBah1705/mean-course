@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,13 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  private readonly authService = inject(AuthService);
+  
   onLogin(form: NgForm) {
-    console.log('Login form submitted', form.value);
-    // Here you would typically handle the login logic, such as calling a service to authenticate the user.
+    if(form.invalid) {
+      return;
+    }
+    
+    this.authService.login(form.value.email, form.value.password);
   }
 }

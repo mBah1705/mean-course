@@ -64,14 +64,14 @@ export class PostsService {
       postData.append('image', image, title)
     }
 
-    this.httpClient.post<{message: string, post: Post}>('http://localhost:3000/api/posts', postData).subscribe(response => {
+    this.httpClient.post<{message: string, post: Post}>('http://localhost:3000/api/posts', postData).subscribe(() => {
       this.router.navigate(['/'])
     })
   }
 
   updatePost(id: string | null, title: string, content: string, image: File | string | null) {
     const post: Post = { id, title, content, imagePath: image as string };
-    this.httpClient.put(`http://localhost:3000/api/posts/${id}`, post).subscribe(response => {
+    this.httpClient.put(`http://localhost:3000/api/posts/${id}`, post).subscribe(() => {
       this.router.navigate(['/'])
       })
   }

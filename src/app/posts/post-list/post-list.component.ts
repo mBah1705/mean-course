@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { getFrenchPaginatorIntl } from './french-paginator-intl';
+import { AuthService } from '../../auth/auth.service';
 @Component({
   selector: 'app-post-list',
   imports: [MatExpansionModule, MatButtonModule, MatPaginatorModule, RouterLink],
@@ -18,8 +19,10 @@ import { getFrenchPaginatorIntl } from './french-paginator-intl';
 export class PostListComponent implements OnInit {
 
   private readonly postsService = inject(PostsService)
+  private readonly authService = inject(AuthService)
   
   posts = linkedSignal<Post[]>(() => this.postsService.posts())
+  isAuthenticated = linkedSignal(() => this.authService.isAuthenticated)
 
   pageIndex = 0
   pageSize = 2

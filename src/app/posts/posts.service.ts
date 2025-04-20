@@ -29,7 +29,7 @@ export class PostsService {
         map(responseData => {
           return {
             posts: responseData.posts.map((post: PostData) => {
-              return {title: post.title, content: post.content, id: post._id, imagePath: post.imagePath}
+              return {title: post.title, content: post.content, id: post._id, imagePath: post.imagePath, creator: post.creator}
             }), 
             maxPosts: responseData.maxPosts
           }
@@ -49,7 +49,8 @@ export class PostsService {
             title: responseData.post.title,
             content: responseData.post.content,
             id: responseData.post._id,
-            imagePath: responseData.post.imagePath
+            imagePath: responseData.post.imagePath,
+            creator: responseData.post.creator
           }
         })
       )
@@ -70,7 +71,7 @@ export class PostsService {
   }
 
   updatePost(id: string | null, title: string, content: string, image: File | string | null) {
-    const post: Post = { id, title, content, imagePath: image as string };
+    const post: Post = { id, title, content, imagePath: image as string, creator: null };
     this.httpClient.put(`http://localhost:3000/api/posts/${id}`, post).subscribe(() => {
       this.router.navigate(['/'])
       })

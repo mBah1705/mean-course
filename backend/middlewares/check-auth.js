@@ -1,11 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 export const checkAuth = (req, res, next) => {
-    
     const token = req.headers['x-authentication-token'];
-
-    console.log(req.headers);
-    
 
     if (!token) {
         throw new Error('Authentication failed!');

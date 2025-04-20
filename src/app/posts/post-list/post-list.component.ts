@@ -29,6 +29,8 @@ export class PostListComponent implements OnInit {
   length = linkedSignal<number>(() => this.postsService.maxPosts())
   pageSizeOptions = [1, 2, 5, 10]
 
+  userId = linkedSignal<string | null>(() => this.authService.userId)
+
   ngOnInit(): void {
     this.postsService.getPosts(this.pageSize, this.pageIndex + 1)
   }

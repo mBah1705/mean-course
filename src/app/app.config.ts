@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(
       withInterceptors(
-        [AuthInterceptor],
+        [AuthInterceptor], // Add your interceptors here
       )
     ),
   ],

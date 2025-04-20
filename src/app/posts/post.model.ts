@@ -3,6 +3,7 @@ export interface Post {
     content: string;
     id: string | null;
     imagePath: string | null;
+    creator: string | null;
 }
 
 export interface PostData {
@@ -10,4 +11,5 @@ export interface PostData {
     content: string;
     _id: string;
     imagePath: string | null;
+    creator: string;
 }

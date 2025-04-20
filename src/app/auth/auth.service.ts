@@ -32,7 +32,7 @@ export class AuthService {
   createUser(email: string, password: string) {
     const authData: AuthData = { email, password };
     this.httpClient.post<{message: string, authData: AuthData}>(`${this.apiUrl}/signup`, authData).subscribe(
-      {next: response => console.log(response.message),
+      {next: (response) => {this.router.navigate(['/'])},
       error: error => console.log(error) 
     }) 
   }

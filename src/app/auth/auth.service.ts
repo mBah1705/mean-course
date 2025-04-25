@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthData } from './auth-data.model';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class AuthService {
   private readonly httpClient = inject(HttpClient);
   private readonly router = inject(Router);
 
-  private readonly apiUrl = 'http://localhost:3000/api/user';
+  private readonly apiUrl = environment.apiUrl + '/user/';
+
   private _token: string | null = null;
   private readonly _isAuthenticated = signal(false);
 
@@ -31,7 +33,7 @@ export class AuthService {
 
   createUser(email: string, password: string) {
     const authData: AuthData = { email, password };
-    this.httpClient.post<{message: string, authData: AuthData}>(`${this.apiUrl}/signup`, authData).subscribe(
+    this.httpClient.post<{message: string, authData: AuthData}>(`${this.apiUrl}signup`, authData).subscribe(
       {next: (response) => {this.router.navigate(['/'])},
       error: error => console.log(error) 
     }) 
@@ -39,7 +41,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     const authData: AuthData = { email, password };
-    this.httpClient.post<{message: string, token: string, expiresIn: number, userId: string}>(`${this.apiUrl}/login`, authData).subscribe(response => {
+    this.httpClient.post<{message: string, token: string, expiresIn: number, userId: string}>(`${this.apiUrl}login`, authData).subscribe(response => {
       this._token = response.token
       this._isAuthenticated.set(!!this._token)
       if (this._token) {

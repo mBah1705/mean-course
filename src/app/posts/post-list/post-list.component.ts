@@ -43,6 +43,10 @@ export class PostListComponent implements OnInit {
 
   onDeletePost(postId: string | null) {
     this.postsService.deletePost(postId).subscribe(() => {
+      if(this.posts().length % this.pageSize === 1 && this.pageIndex > 0) {
+        this.pageIndex--
+      }
+      
       this.postsService.getPosts(this.pageSize, this.pageIndex + 1)
     })
   }

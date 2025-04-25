@@ -3,6 +3,7 @@ import { Post, PostData } from './post.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class PostsService {
   httpClient = inject(HttpClient)
   private readonly router = inject(Router)
 
+    private readonly apiUrl = environment.apiUrl + '/posts/';
+  
+
   get posts() {
     return this._posts
   }
@@ -24,7 +28,7 @@ export class PostsService {
 
   getPosts(pagesize: number, page: number) {
     const queryParams = `?pagesize=${pagesize}&page=${page}`
-    this.httpClient.get<{message: string, posts: any, maxPosts: number}>('http://localhost:3000/api/posts' + queryParams)
+    this.httpClient.get<{message: string, posts: any, maxPosts: number}>(this.apiUrl + queryParams)
       .pipe(
         map(responseData => {
           return {
@@ -42,7 +46,7 @@ export class PostsService {
   }
 
   getPost(id: string | null) {
-    return this.httpClient.get<{message: string, post: PostData}>(`http://localhost:3000/api/posts/${id}`)
+    return this.httpClient.get<{message: string, post: PostData}>(`${this.apiUrl}${id}`)
       .pipe(
         map(responseData => {
           return {
@@ -65,19 +69,19 @@ export class PostsService {
       postData.append('image', image, title)
     }
 
-    this.httpClient.post<{message: string, post: Post}>('http://localhost:3000/api/posts', postData).subscribe(() => {
+    this.httpClient.post<{message: string, post: Post}>(this.apiUrl, postData).subscribe(() => {
       this.router.navigate(['/'])
     })
   }
 
   updatePost(id: string | null, title: string, content: string, image: File | string | null) {
     const post: Post = { id, title, content, imagePath: image as string, creator: null };
-    this.httpClient.put(`http://localhost:3000/api/posts/${id}`, post).subscribe(() => {
+    this.httpClient.put(`${this.apiUrl}${id}`, post).subscribe(() => {
       this.router.navigate(['/'])
       })
   }
 
   deletePost(postId: string | null) {
-    return this.httpClient.delete(`http://localhost:3000/api/posts/${postId}`)
+    return this.httpClient.delete(`${this.apiUrl}${postId}`)
   }
 }

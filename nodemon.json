@@ -1,0 +1,7 @@
+{
+    "env": {
+        "MONGO_ATLAS_USER": "moon",
+        "MONGO_ATLAS_PWD": "DJ4dsBfs6kyThxL",
+        "JWT_KEY": "secret_this_should_be_longer"
+    }
+}

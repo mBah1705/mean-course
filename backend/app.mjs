@@ -7,7 +7,7 @@ import postsRoutes from './routes/posts.js';
 import userRoutes from './routes/user.js';
 
 const app = express();
-const mongoDB = 'mongodb+srv://moon:DJ4dsBfs6kyThxL@cluster0.2ccb2lc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const mongoDB = `mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PWD}@cluster0.2ccb2lc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 mongoose.connect(mongoDB)
     .then(() => {
         console.log('Connected to database!');
@@ -20,7 +20,7 @@ mongoose.connect(mongoDB)
 app.use(bodyParser.json({ limit: '20mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/images', express.static(path.join('backend/images')));
+app.use('/images', express.static(path.join('images')));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
